@@ -1,5 +1,6 @@
 package com.rajneesh304.notificationapi.service.impl;
 
+import com.rajneesh304.notificationapi.config.MailSenderConfig;
 import com.rajneesh304.notificationapi.model.dtos.NotificationDto;
 import com.rajneesh304.notificationapi.model.dtos.NotificationRequestDto;
 import com.rajneesh304.notificationapi.model.dtos.NotificationResponseDto;
@@ -9,8 +10,10 @@ import com.rajneesh304.notificationapi.model.entities.User;
 import com.rajneesh304.notificationapi.repository.ChannelDetailRepository;
 import com.rajneesh304.notificationapi.repository.NotificationRepository;
 import com.rajneesh304.notificationapi.repository.UserRepository;
+import com.rajneesh304.notificationapi.service.NotificationSenderService;
 import com.rajneesh304.notificationapi.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -70,12 +73,14 @@ public class NotificationServiceImpl implements NotificationService {
 
         if (notification.getUser().getEmailEnabled()) {
             channelDetails.add(createChannelDetail(notification, "EMAIL"));
-            // Call your email service here (e.g., sendEmail(notification))
+            JavaMailSender mailSender = MailSenderConfig.createJavaMailSender();
+            EmailSenderServiceImpl emailSenderService = new EmailSenderServiceImpl(mailSender);
+            emailSenderService.sendEmail(notification.getUser().getEmail(), "Message from myNotificationService", notification.getMessageContent());
         }
 
         if (notification.getUser().getWhatsappEnabled()) {
             channelDetails.add(createChannelDetail(notification, "WHATSAPP"));
-            // Call your WhatsApp service here (e.g., sendWhatsapp(notification))
+            // Call WhatsApp service here (e.g., sendWhatsapp(notification))
         }
 
         // Save channel details to the database

@@ -1,10 +1,13 @@
 package com.rajneesh304.notificationapi.controller;
 
+import com.rajneesh304.notificationapi.config.MailSenderConfig;
 import com.rajneesh304.notificationapi.model.dtos.UserDto;
 import com.rajneesh304.notificationapi.service.UserService;
+import com.rajneesh304.notificationapi.service.impl.EmailSenderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,4 +45,14 @@ public class UserController {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
+
+    /*
+    Test notification - SUCCEEDED
+     */
+//    @GetMapping("/service")
+//    public void trigger () {
+//        JavaMailSender mailSender = MailSenderConfig.createJavaMailSender();
+//        EmailSenderServiceImpl emailSenderService = new EmailSenderServiceImpl(mailSender);
+//        emailSenderService.sendEmail("singhatiya.rajneesh2@gmail.com", "Test", "This is a test mail");
+//    }
 }
