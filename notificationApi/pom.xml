@@ -115,6 +115,14 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.rajneesh304</groupId>
+            <artifactId>notificationProducer</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/notificationProducer.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>

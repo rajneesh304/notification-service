@@ -13,6 +13,6 @@ public class Producer {
     KafkaSender kafkaSender;
     @PostMapping
     public void sendMessage(@RequestBody Content content) {
-        kafkaSender.sendMessage(content.getMessage(), "topic-2");
+        kafkaSender.sendMessage(content, "topic-2");
     }
 }

@@ -6,6 +6,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -21,25 +22,24 @@ public class User {
     @Column(name = "id")
     private UUID id;
 
-    @Column(nullable = false, unique = true)
-    private UUID userId;
+    @Column(nullable = false)
+    private String firstName;
+
+    @Column
+    private String lastName;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column
     private String phoneNumber;
 
     @Column(nullable = false)
-    private Boolean emailEnabled;
+    private Boolean emailEnabled = true;
 
     @Column(nullable = false)
-    private Boolean whatsappEnabled;
+    private Boolean whatsappEnabled = false;
 
-    @OneToMany(
-            mappedBy = "user",
-            cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
-    private List<Notification> notifications = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Notification> notifications;
 }

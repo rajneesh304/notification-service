@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, UUID> {
-    List<Notification> findByUserUserId(UUID userId);  // Custom query to find notifications by userId
+//    List<Notification> findByUserUserId(UUID userId);  // Custom query to find notifications by userId
 }
